@@ -1,4 +1,65 @@
 CalEvents
-=========
+=============
 
-Androidã‚¢ãƒ—ãƒªã®ã‚µãƒ³ãƒ—ãƒ«ã§ã™ã€‚ ã‚³ãƒ³ãƒ†ãƒ³ãƒˆãƒ—ãƒ­ãƒã‚¤ãƒ€ã‹ã‚‰ã‚«ãƒ¬ãƒ³ãƒ€ãƒ¼ã®ã‚¤ãƒ™ãƒ³ãƒˆã‚’å…¨ã¦å–å¾—ã—ã¦ã€å„ã‚¤ãƒ™ãƒ³ãƒˆã‚’ä¸€éƒ¨æŠœç²‹ã—ã¦Logã¸ã®å‡ºåŠ›ã¨ç”»é¢è¡¨ç¤ºã‚’è¡Œã„ã¾ã™ã€‚
+Android Application Sample.
+It get all calendar events from content provider, output to log, and display part of event. 
+
+[Considerations when building]
+There is a following in a library that is included with the distribution of ical4j-1.0.5 .
+ * backport-util-concurrent-3.1.jar
+ * commons-codec-1.8.jar
+ * commons-lang-2.6.jar
+ * commons-logging-1.1.3.jar
+ * groovy-all-2.1.1.jar   <<--- !! Note here !!
+ * ical4j-1.0.5.jar
+
+groovy-all-2.1.1.jar generates a warning in large quantities at build time in auther's development environment,  Eclipse is terminated with an out of memory by it.
+To avoid this problem, it is preferable to use groovy-2.2.2-indy.jar than groovy-all-2.1.1.jar.
+However, instead of placing the library folder(PROJECT_DIR/libs/), by the use by setting the classpath as external library, would avoid the problems of another new.
+
+From the above, I did not include in the git repository of this application groovy-all-2.1.1.jar of ical4j included.
+If you want to build this application, it is necessary to get the groovy-2.2.2-indy.jar on your own, use it be incorporated into the project as an external JAR. (set .classpath)
+
+ -- get groovy --
+  http://groovy.codehaus.org/Download
+
+
+----------------------------------------------------------------------
+
+AndroidƒAƒvƒŠ‚ÌƒTƒ“ƒvƒ‹‚Å‚·B
+ƒRƒ“ƒeƒ“ƒgƒvƒƒoƒCƒ_‚©‚çƒJƒŒƒ“ƒ_[‚ÌƒCƒxƒ“ƒg‚ð‘S‚ÄŽæ“¾‚µ‚ÄAŠeƒCƒxƒ“ƒg‚ðˆê•””²ˆ‚µ‚ÄLog‚Ö‚Ìo—Í‚Æ‰æ–Ê•\Ž¦‚ðs‚¢‚Ü‚·B
+
+yƒrƒ‹ƒhŽž‚Ì’ˆÓ“_z
+ical4j-1.0.5‚Ì”z•z•¨‚É“¯«‚³‚ê‚Ä‚¢‚éƒ‰ƒCƒuƒ‰ƒŠ(jarƒtƒ@ƒCƒ‹)‚É‚Í‰º‹L‚ª‚ ‚è‚Ü‚·B
+ Ebackport-util-concurrent-3.1.jar
+ Ecommons-codec-1.8.jar
+ Ecommons-lang-2.6.jar
+ Ecommons-logging-1.1.3.jar
+ Egroovy-all-2.1.1.jar   <-- ‚±‚±‚É’ˆÓ
+ Eical4j-1.0.5.jar
+
+‚±‚ê‚ç‚Ì‚¤‚¿AìŽÒ‚ÌŠJ”­ŠÂ‹«(Eclipse with ADT)‚Å‚Íical4j“¯«‚Ìgroovy-all‚ðŽg‚¤‚ÆAPKƒrƒ‹ƒhŽž‚É‚¯‚½‚½‚Ü‚µ‚­warning‚ªo‚Äƒrƒ‹ƒhŠ®—¹‘O‚ÉEclipse‚ªƒƒ‚ƒŠ•s‘«‚Å—Ž‚¿‚½‚è‚Æ“‚¢‚±‚Æ‚É‚È‚Á‚½B
+FX’²‚×‚ÄAuindy‚ð—LŒø‚É‚µ‚Ä‚égroovy‚¾‚Á‚½‚ç‚Ç‚¤‚¾‚ë‚¤Hv‚Æl‚¦‚½B
+
+‚»‚±‚Ågroovy-2.2.2-indy.jar‚ðŽg‚Á‚½B
+‚·‚é‚Æ‚Ü‚¸Aproject’¼‰º‚Ìlibs‚É•ú‚èž‚ñ‚¾ê‡‚Ígroovy-all‚ÌŽž‚Æ“¯—l‚Ìwarning‚ª‚¯‚½‚½‚Ü‚µ‚­o‚ÄÅI“I‚ÉƒGƒ‰[‚Åƒrƒ‹ƒh‚Å‚«‚È‚©‚Á‚½B
+‚µ‚©‚µ‚±‚ê‚ðŠO•”jar‚Æ‚µ‚Äproject‚Éadd‚µ‚½ê‡A–â‘è‚ª‰ðÁ‚µ‚Äapk‚Ìƒrƒ‹ƒh‚ªŠ®—¹‚µ‚½B
+
+ˆÈã‚Ì‚±‚Æ‚©‚çAgroovy‚ÉŠÖ‚µ‚Ä‚Í ical4j“¯«‚Ìjarƒtƒ@ƒCƒ‹‚ð–{ƒAƒvƒŠ‚ÌgitƒŠƒ|ƒWƒgƒŠƒf[ƒ^‚É‚ÍŠÜ‚ß‚È‚¢‚æ‚¤‚É‚µ‚½B
+–{ƒŠƒ|ƒWƒgƒŠ‚©‚çsource‚ðŽæ“¾‚µ‚Äƒrƒ‹ƒh‚·‚éê‡‚ÍA•Ê“rgroovy-2.2.2-indy.jar‚ð“üŽè‚µ‚ÄŠO•”jar‚Æ‚µ‚Äproject‚ÉŽæ‚èž‚ñ‚Å(.classpath‚Ékind="lib"‚ÅŽw’è‚µ‚Ä)Žg‚Á‚Ä‚­‚¾‚³‚¢B
+
+ -- groovy‚Ì”z•zŒ³ --
+  http://groovy.codehaus.org/Download
+
+
+
+----------------------------------------------------------------------
+
+ìŽÒ‚ÌŠJ”­/ƒeƒXƒgŠÂ‹«  (auther's development and test environment)
+
+OS : Windows7 / Mac OS X Mavericks
+IDE: Eclipse with ADT (Eclipse 4.2 / ADT v22.3.0)
+Android deviceis: 
+    HTCJ ISW13HT    [Android 4.0.2]
+    IS03            [Android 2.2.1]
+
